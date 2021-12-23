@@ -3,13 +3,15 @@ package com.plany.project.model;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
 
 public class UserModel {
 
 	private @Id @GeneratedValue(strategy = GenerationType.IDENTITY) Long idUser;
-	private String name;
-	private String email;
-	private String passwork;
+	private @NotBlank String name;
+	private @NotBlank @Email String email;
+	private @NotBlank String passwork;
 	
 	public Long getIdUser() {
 		return idUser;
