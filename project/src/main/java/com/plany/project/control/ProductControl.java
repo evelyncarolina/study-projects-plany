@@ -70,8 +70,15 @@ public class ProductControl {
 		}
 	}
 	
-	
-	
+	public ResponseEntity<Object> deleteById(@PathVariable(value = "id") Long idProduct){
+		Optional<ProductModel> deteleId = repository.findById(idProduct);
+		
+		if(deteleId.isEmpty()) {
+			return ResponseEntity.status(404).build();
+		} else {
+			return ResponseEntity.status(200).body(idProduct);
+		}
+	}
 	
 }
 
