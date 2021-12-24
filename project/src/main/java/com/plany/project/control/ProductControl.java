@@ -47,7 +47,7 @@ public class ProductControl {
 		}	
 	}
 	
-	
+	@GetMapping("/all")
 	public ResponseEntity<List<ProductModel>> getAll() {
 		List<ProductModel> listObjetic = repository.findAll();
 		if (listObjetic.isEmpty()) {
