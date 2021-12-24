@@ -6,6 +6,8 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,7 +24,7 @@ public class ProductControl {
 	private @Autowired ProductRepository repository;
 	private @Autowired ProductService service;
 	
-	@PostMapping("/registerProduct")
+	@PostMapping("/created")
 	public ResponseEntity<Object> registerProduct(@Valid @RequestBody ProductModel newProduct){
 		Optional<Object> objetcOptional = Optional.ofNullable(service.registerProduct(newProduct));
 				
@@ -30,9 +32,22 @@ public class ProductControl {
 			return ResponseEntity.status(400).build();
 		} else {
 			return ResponseEntity.status(200).body(objetcOptional.get());
-		}
-		
+		}	
 	}
+	
+	@GetMapping("/id/{id}")
+	public ResponseEntity<Object> findById(@PathVariable(value = "id") Long idProduct){
+		Optional<ProductModel> productId = repository.findById(idProduct);
+		
+		if(productId.isEmpty()) {
+			return ResponseEntity.status(204).build();
+		} else {
+			return ResponseEntity.status(400).build();
+		}
+			
+	}
+	
+	
 	
 
 }
