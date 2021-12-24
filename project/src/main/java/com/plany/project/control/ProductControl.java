@@ -1,5 +1,6 @@
 package com.plany.project.control;
 
+import java.util.List;
 import java.util.Optional;
 
 import javax.validation.Valid;
@@ -40,14 +41,21 @@ public class ProductControl {
 		Optional<ProductModel> productId = repository.findById(idProduct);
 		
 		if(productId.isEmpty()) {
-			return ResponseEntity.status(204).build();
+			return ResponseEntity.status(200).build();
 		} else {
 			return ResponseEntity.status(400).build();
-		}
-			
+		}	
 	}
 	
 	
+	public ResponseEntity<List<ProductModel>> getAll() {
+		List<ProductModel> listObjetic = repository.findAll();
+		if (listObjetic.isEmpty()) {
+			return ResponseEntity.status(204).build();
+		} else {
+			return ResponseEntity.status(200).body(listObjetic);
+		}
+	}
 	
 
 }
