@@ -2,6 +2,8 @@ package com.plany.project.service;
 
 import java.util.Optional;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,6 +24,11 @@ public class ProductService {
 		}).orElseGet(() -> {
 			return Optional.empty();
 		});
+	}
+
+	public Optional<?> updateProduct(@Valid ProductModel updateProduct) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
