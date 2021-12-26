@@ -70,6 +70,7 @@ public class ProductControl {
 		}
 	}
 	
+	@DeleteMapping("delete/{id}")
 	public ResponseEntity<Object> deleteById(@PathVariable(value = "id") Long idProduct){
 		Optional<ProductModel> deteleId = repository.findById(idProduct);
 		
