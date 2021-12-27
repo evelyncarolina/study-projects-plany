@@ -6,6 +6,7 @@ import java.util.Optional;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Example;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.plany.project.model.ProductModel;
@@ -73,9 +75,13 @@ public class ProductControl {
 	
 	//Pesquesar por preço 
 	@GetMapping("/search")
-	public ResponseEntity<List<ProductModel>> searchPrice(){
+	public ResponseEntity<List<ProductModel>> searchPrice(@RequestParam double priceOne, @RequestParam double priceTwo){
 		List<ProductModel> priceList = repository.findAll();
-		return null;
+		if (priceList.isEmpty()) {
+			return ResponseEntity.status(404).build();
+		} else {
+			return ResponseEntity.status(200).build();
+		}
 	}
 	
 	@DeleteMapping("/delete/{id}")
