@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -70,7 +71,14 @@ public class ProductControl {
 		}
 	}
 	
-	@DeleteMapping("delete/{id}")
+	//Pesquesar por preço 
+	@GetMapping("/search")
+	public ResponseEntity<List<ProductModel>> searchPrice(){
+		List<ProductModel> priceList = repository.findAll();
+		return null;
+	}
+	
+	@DeleteMapping("/delete/{id}")
 	public ResponseEntity<Object> deleteById(@PathVariable(value = "id") Long idProduct){
 		Optional<ProductModel> deteleId = repository.findById(idProduct);
 		
